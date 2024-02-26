@@ -21,3 +21,7 @@ app.listen(3000, () => {
     console.log("working");
 });
 
+
+app.get("/test", (req,res) => {
+    res.json({message:"API is working"});
+} )
