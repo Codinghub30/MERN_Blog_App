@@ -1,10 +1,15 @@
-import { Button, Navbar, NavbarLink, TextInput } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar, NavbarLink, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import {AiOutlineSearch} from 'react-icons/ai'
-import {FaMoon} from 'react-icons/fa'
-
+import {FaMoon, FaSun} from 'react-icons/fa'
+import { useSelector  } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice";
 export default function Header() {
     const path = useLocation().pathname;
+    const dispatch = useDispatch();
+    const {currentUser} = useSelector(state => state.user)
+    const{theme} = useSelector((state) => state.theme);
   return (
     <Navbar className="border-b-2">
         <Link to="/" className='self center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -19,12 +24,39 @@ export default function Header() {
             <AiOutlineSearch/>
         </button>
         <div className="flex gap-2 md:order-2">
-            <Button className="w-12  h-10 hidden sm:inline" color="gray" pill>
-                <FaMoon/>
+            <Button className="w-12  h-10 hidden sm:inline" color="gray" pill onClick={() => dispatch(toggleTheme())}>
+                {theme === 'light' ?   <FaMoon/> :  <FaSun/> 
+              
+                
+                }
             </Button>
-            <Link to='/signin'>
-            <button class="relative inline-flex items-center justify-center p-2 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800" outline>Sign In </button>
-            </Link>
+            {currentUser ? (
+                <Dropdown 
+                arrowIcon={false}
+                inline
+                label={
+                    <Avatar alt="user" img={currentUser.profilePicture}
+                    rounded />
+                }
+                >
+                    <Dropdown.Header>
+                        <span className="block text-sm">@UserName: {currentUser.username}</span>
+                        <span className="block text-sm font-medium truncate">@Email {currentUser.email}</span>
+                    </Dropdown.Header>
+                    <Link to={'/dashboard?tab=profile'}>
+                        <Dropdown.Item><strong>Profile</strong></Dropdown.Item>
+
+                    </Link>
+                    <Dropdown.Divider/>
+                    <Dropdown.Item>Sign Out</Dropdown.Item>
+                </Dropdown>
+            ):
+            (
+                <Link to='/signin'>
+                <button class="relative inline-flex items-center justify-center p-2 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800" outline>Sign In </button>
+                </Link>
+
+            )}
             <Navbar.Toggle />
             
         </div>
