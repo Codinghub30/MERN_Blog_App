@@ -6,3 +6,8 @@ redux persist
 Firebase
 
 Using the Firebase in order to get signin through the google
+
+
+
+Problems Faced 
+1) Faced the problem of image uploading in the firebase storage and loading as it was showing 403 forbiden error in profile page
