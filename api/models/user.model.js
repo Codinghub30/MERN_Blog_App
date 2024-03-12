@@ -21,8 +21,12 @@ const userSchema = new mongoose.Schema({
     profilePicture:{
         type: String,
         default: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw0oyRf1vqmYdE-y7fy00jqe&ust=1709387656799000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPiZ07Kb04QDFQAAAAAdAAAAABAE",
-    }
-}, {timestamps:true})
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+ }, {timestamps:true})
 
 const User = mongoose.model('User', userSchema);
 
