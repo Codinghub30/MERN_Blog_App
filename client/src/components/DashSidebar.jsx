@@ -2,7 +2,7 @@ import { Sidebar, SidebarItem } from "flowbite-react";
 import { HiUser,
   HiArrowSmRight,
   HiDocumentText,
-  // HiOutlineUserGroup,
+  HiOutlineUserGroup,
   // HiAnnotation,
   // HiChartPie,
  } from 'react-icons/hi'
@@ -55,6 +55,16 @@ export default function DashSidebar(){
                           <Sidebar.Item active={tab === 'posts'}
                           icon={HiDocumentText}
                           as='div'>Posts</Sidebar.Item>
+                        </Link>
+                      )
+                    }
+
+{
+                      currentUser.isAdmin && (
+                        <Link to='/dashboard?tab=users'>
+                          <Sidebar.Item active={tab === 'users'}
+                          icon={HiOutlineUserGroup}
+                          as='div'>Users</Sidebar.Item>
                         </Link>
                       )
                     }
