@@ -24,13 +24,7 @@ Experiment with Schema: Try experimenting with your Mongoose schema by explicitl
         ></div> In PostPage due to gap after > and before </div> there should be no gap
 
 
-
-
-
-
-
-
-
+        
 
 
 
@@ -43,3 +37,6 @@ working .................................
 If you  want to post something like create, seethe post route  update etc then first 
 1) We write it in post.route
 2) we write it in post controller and then use in FRONT-END
+
+
+When  We do post and create something then if we want to see the details that we have done post then we use the get like in comment.route  Post and get
